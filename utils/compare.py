@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """Tool to filter, organize, compare and display benchmarking results. Usefull
 for smaller datasets. It works great with a few dozen runs it is not designed to
 deal with hundreds.
@@ -254,7 +254,7 @@ def print_result(d, limit_output=True, shorten_names=True, minimal_names=False,
     def float_format(x):
         if x == '':
             return ''
-        return "%6.2f" % (x,)
+        return "%6.4f" % (x,)
 
     pd.set_option("display.max_colwidth", 0)
     out = dataout.to_string(index=False, justify='left',
@@ -282,6 +282,8 @@ if __name__ == "__main__":
     parser.add_argument('--merge-average', action='store_const',
                         dest='merge_function', const=pd.DataFrame.mean,
                         default=pd.DataFrame.min)
+    parser.add_argument('--merge-median', action='store_const',
+                        dest='merge_function', const=pd.DataFrame.median)
     parser.add_argument('--merge-min', action='store_const',
                         dest='merge_function', const=pd.DataFrame.min)
     parser.add_argument('--merge-max', action='store_const',
